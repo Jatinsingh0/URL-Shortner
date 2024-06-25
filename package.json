@@ -1,0 +1,17 @@
+{
+  "name": "url-shortner",
+  "version": "1.0.0",
+  "description": "creating a URL-Shortner that convert Long Url's into Short Url's",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "Jatin singh",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongoose": "^8.4.3",
+    "nodemon": "^3.1.4",
+    "shortid": "^2.2.16"
+  }
+}

@@ -10,9 +10,19 @@ const generateShortUrl = async (req, res) => {
         redirectUrl: body.url,
         visitHistory:[]
     })
-    res.json({id: shortId});
+    return res.render("home", {id: shortId})
+}
+
+const getAnalytics = async (req, res) => {
+     const shortId = req.params.shortId;
+     const result = await URL.findOne({shortId});
+     return res.json({
+        totalClicks: result.visitHistory.length,
+        analytics: result.visitHistory,
+     });
 }
 
 module.exports = {
     generateShortUrl,
+    getAnalytics,
 }

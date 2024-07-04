@@ -1,9 +1,10 @@
 const express = require("express");
-const urlRoute = require("./routes/url")
 const URL = require("./models/url")
 const {connectMongodb} = require("./connect")
 const path = require("path")
 const staticRoute = require("./routes/staticRouter")
+const urlRoute = require("./routes/url")
+const userRoute = require("./routes/users")
 const app = express();
 const PORT = 8001;
 
@@ -18,6 +19,7 @@ app.set("views", path.resolve("./views"));
 
 app.use("/url", urlRoute);
 app.use("/", staticRoute);
+app.use("/user", userRoute)
 
 app.get("/url/:shortId", async(req, res)=>{
   const shortId = req.params.shortId;

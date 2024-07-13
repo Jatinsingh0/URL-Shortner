@@ -13,21 +13,21 @@ const userSignup = async(req, res) => {
 }
 
 const userLogin = async (req, res) => {
-  const{email, password} = req.body;
-  const user = await User.findOne({
-    email, 
-    password,
-});
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email, password });
 
-if(!user){
- return res.render("login", {
-   error: "Invaild User."
- });
-}
+    if (!user) {
+      return res.status(401).json({ error: "Invalid credentials" });
+    }
 
-
-const token = setUser(user)
-res.cookie("uid", token)
+    const token = setUser(user);
+    res.cookie("token", token);
+    res.json({ token });
+  } catch (error) {
+    console.error("Error in login API:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 
 return res.redirect("/")
 }

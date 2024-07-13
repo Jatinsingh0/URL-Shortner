@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const URL = require("./models/url")
 const {connectMongodb} = require("./connect")

@@ -13,7 +13,7 @@ const restrictUser = async (req, res, next) => {
 
     if (!user) {
       console.log("User not found, redirecting to login.");
-      return res.redirect("/login");
+      return res.redirect("/signup");
     }
 
     req.user = user;

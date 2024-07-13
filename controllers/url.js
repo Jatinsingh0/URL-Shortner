@@ -8,8 +8,9 @@ const generateShortUrl = async (req, res) => {
     await URL.create({
         shortId: shortId,
         redirectUrl: body.url,
-        visitHistory:[]
-    })
+        visitHistory:[],
+        createdBy: req.user._id,
+    });
     return res.render("home", {id: shortId})
 }
 
@@ -19,7 +20,7 @@ const getAnalytics = async (req, res) => {
      return res.json({
         totalClicks: result.visitHistory.length,
         analytics: result.visitHistory,
-     });
+     }); 
 }
 
 module.exports = {

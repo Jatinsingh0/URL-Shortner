@@ -1,4 +1,6 @@
+
 const User = require("../models/users")
+const {setUser} = require("../utils/auth")
 
 const userSignup = async(req, res) => {
     const{name, password, email} = req.body;
@@ -12,16 +14,21 @@ const userSignup = async(req, res) => {
 
 const userLogin = async (req, res) => {
   const{email, password} = req.body;
-  const userFound = await User.findOne({
+  const user = await User.findOne({
     email, 
     password,
 });
 
-if(!userFound){
+if(!user){
  return res.render("login", {
    error: "Invaild User."
  });
 }
+
+
+const token = setUser(user)
+res.cookie("uid", token)
+
 return res.redirect("/")
 }
 
